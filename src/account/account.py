@@ -15,6 +15,8 @@ class account(transaction):
                 self._protected = 'protected'   # this is a protected instance variable 
         else:
             self.__balance = 0.0 
+            self.public = 'public'        
+            self._protected = 'protected' 
     
     def __privateMethod(self):
         print('Private Method')
@@ -40,7 +42,7 @@ class account(transaction):
                 raise ValueError("Credit amount is less than zero.")
         except ValueError as e: 
             exit(e)
-        else:
+        finally:
             self.__balance += amount
 
     def debit(self,amount:float):
@@ -51,8 +53,31 @@ class account(transaction):
                 raise ValueError("Debit amount is greater than the balance")
         except ValueError as e:
             exit(e)
-        else:
+        finally:
             self.__balance -= amount
+
+    def __str__(self):
+        return f"account Balance = {self.__balance} public={self.public}"
+    
+    def __eq__(self, other):
+        # check if other is not None 
+        if other is not None:
+            # check if other is an account type
+            if isinstance(other,account):
+                # check if other's balance is equal to the balance 
+                # of the calling object 
+                if other.__balance == self.__balance:
+                    return True 
+                
+        return False
+    
+    @staticmethod 
+    def sum(account1,account2):
+        if(account1 is None or account2 is None):
+            return 0.0 
+        else: 
+            return  account1.__balance + account2.__balance 
+        
 
 
        
