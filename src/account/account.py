@@ -42,7 +42,7 @@ class account(transaction):
                 raise ValueError("Credit amount is less than zero.")
         except ValueError as e: 
             exit(e)
-        finally:
+        else:
             self.__balance += amount
 
     def debit(self,amount:float):
@@ -53,7 +53,7 @@ class account(transaction):
                 raise ValueError("Debit amount is greater than the balance")
         except ValueError as e:
             exit(e)
-        finally:
+        else:
             self.__balance -= amount
 
     def __str__(self):
@@ -75,9 +75,27 @@ class account(transaction):
     def sum(account1,account2):
         if(account1 is None or account2 is None):
             return 0.0 
+        elif (not isinstance(account1,account) or not isinstance(account2,account)):
+            return 0.0
         else: 
             return  account1.__balance + account2.__balance 
         
 
 
-       
+    @staticmethod
+    def transfer(a,amount:float):
+        try:
+            if (amount<0.0):
+                raise ValueError("Debit amount is less than zero")
+            elif (a is None):
+                raise ValueError("Account is None")
+            elif (not isinstance(a,account)):
+                raise ValueError("a is not a account type")
+            elif (amount > a.getBalance()):
+                raise ValueError("Debit amount is greater than the balance in the specified account")
+        except ValueError as e: 
+            exit(e)
+        else: 
+            a.debit(amount) 
+            newAccount = account(amount)
+            return newAccount
