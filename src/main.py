@@ -1,4 +1,4 @@
-from account.account import * 
+from savingsaccount.savingsaccount import * 
 
 def main():
     # create an account object named a1 that has a balance of $100 
@@ -103,6 +103,53 @@ def main():
     # display the balance in a1 and a4 
     print("Balance in a1 $%.2f" % (a1.getBalance( ))) 
     print("Balance in a4 $%.2f" % (a4.getBalance( ))) 
+
+    # create a savings account object named sa1 and initialize its balance 
+    # to $10000 and its interest rate to 6% 
+    sa1 = savingsaccount(10000.0, 0.06)
+
+    # display the balance of sa1 
+    print("Balance in sa1 $%.2f" % (sa1.getBalance()))
+
+    # display the interest of sa1
+    print("Interest in sa1 $%.2f" % (sa1.getBalance()))
+
+    # display if the balance of sa1 is empty 
+    print("Is sa1 empty? ", sa1.isEmpyty())
+
+    # disply a string representation of sa1 
+    print(sa1)
+
+    # display the result fof testing 
+    print("Is sa1 equal to a1?", sa1.__eq__(a1))
+
+    # display the result of testing if sa1 is equal to a3 
+    print("Is sa1 equal to a3?", sa1.__eq__(a3))
+
+    # create a savings account object named sa2 and initialize its balance 
+    # to $10000 and its interest rate 5% 
+    sa2 = savingsaccount(10000.0,0.05)
+
+    # display the result of testing if sa1 is equal to sa2 
+    print("Is sa1 equal to sa2?", sa1.__eq__(sa2))
+
+    # change the interest rate of sa2 to 
+    sa2.setInterestRate(0.06)
+
+    # display the result of testing if sa1 is equal to sa2 
+    print("Is sa1 equal to sa2?", sa1.__eq__(sa2))
+
+    # credit sa2 by $1000
+    sa2.credit(1000.0)
+
+    # display the balance of sa2
+    print("Balance in sa2 $%.2f" % (sa2.getBalance()))
+
+    # debit sa2 by $1000
+    sa2.debit(1000.0)
+
+    # display the balance of sa2
+    print("Balance in sa2 $%.2f" % (sa2.getBalance()))
 
 if __name__ == "__main__":
     main()
